@@ -11,8 +11,8 @@ public class PlayerMovementTest
     public void NoVerticalMovementOnNoInput()
     {
         // Test to see if no input causes the character to stand still.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveVertical(0);
         Assert.That(player.position == startingPosition);
     }
@@ -21,8 +21,8 @@ public class PlayerMovementTest
     public void NoHorizontalMovementOnNoInput()
     {
         // Test to see if no input causes the character to stand still.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveHorizontal(0);
         Assert.That(player.position == startingPosition);
     }
@@ -31,8 +31,8 @@ public class PlayerMovementTest
     public void TestUpMovement()
     {
         // Test to see if 'w' moces a character up.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveVertical(1);
         Assert.That(player.position.x > startingPosition.x);
     }
@@ -41,8 +41,8 @@ public class PlayerMovementTest
     public void TestDownMovement()
     {
         // Test to see if 's' moves a character down.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveVertical(-1);
         Assert.That(player.position.x < startingPosition.x);
     }
@@ -51,8 +51,8 @@ public class PlayerMovementTest
     public void TestLeftMovement()
     {
         // Test to see if 'a' moves a character left.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveHorizontal(-1);
         Assert.That(player.position.y < startingPosition.y);
     }
@@ -61,8 +61,8 @@ public class PlayerMovementTest
     public void TestRightMovement()
     {
         // Test to see if 'd' moves a character right.
-        var player = PlayerController();
-        var startingPosition = player.position;
+        var player = new PlayerController();
+        Vector2 startingPosition = player.position;
         player.MoveHorizontal(1);
         Assert.That(player.position.y > startingPosition.y);
     }
