@@ -7,7 +7,7 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
 
 # Product Backlog
 
-[Product and Sprint Backlogs on Google Docs]| ID | User Story | Effort | Priority | Validation Criteria | Status |
+| ID | User Story | Effort | Priority | Validation Criteria | Status |
 |----|------------|--------|----------|---------------------|--------|
 | 001 | As a player, I want to see a title screen at the start of the game so that I can play the game | 2 | 1 | Title screen is displayed on boot | |
 | 001 | As a player, I want to see and pick up a ball so that I can throw it towards the enemy. | 1 | 1 | The player and the ball is visible. | |
