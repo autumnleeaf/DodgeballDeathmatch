@@ -3,8 +3,8 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-Assets/AssetStoreTools*
-Assets/[Pp]lugins
+DodgeballDeathmatch/Assets/AssetStoreTools*
+DodgeballDeathmatch/Assets/[Pp]lugins
 
 # Visual Studio cache directory
 .vs/
