@@ -1,5 +1,4 @@
-# DodgeballDeathmatch
-# Project for COP 4331 - Spring 2018
+# Dodgeball Deathmatch - Project for COP 4331 - Spring 2018
 A dodgeball game that will implement a custom controller.
 
 ## Team Members
