@@ -1,9 +1,7 @@
-# DodgeballDeathmatch
-A dodgeball game that will implement a custom controller.
+# Product Backlog
 
-# Vision Statement
+[Product and Sprint Backlogs on Google Docs](https://docs.google.com/document/d/1De1SJL_7WPUGDRqsERnvuRFFkF4BpmodrcfZZFtcxLk/edit?usp=sharing)
 
-For hardcore gamers who enjoy unique ways to play video games, the game Dodgeball Deathmatch introduces a chaotic way to play the game. Unlike family-funtime Mario Sports Mix dodgeball, Dodgeball Deathmatch has ruthless rules where your warcries come to life. Pummel your enemies with your ferocious force of will as you scream into the microphone. Rage against the dying of the fight with Dodgeball Deathmatch.
 
 # Product Backlog
 
@@ -19,7 +17,3 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
 | 001 | As a player, I want to be able to move my character around the screen so that I can DODGE. | 1 | 1 | The character moves when using the directional input. | |
 | 001 | As a player, I would like to see my character displayed on the screen so that I can know where I am. | 1 | 1 | When starting the game a dot will show representing the character. | |
 | 001 | As a player, I want to see the dodgeball court with lines so that I know where my character is allowed to navigate throughout gameplay. | 1 | 1 | When starting the game a set of lines in the shape of a rectangle and a middle line will display to show limits. | |
-
-# Burndown Chart
-
-[Burndown Chart on Google Docs](https://docs.google.com/spreadsheets/d/1VHMQML5AV-xroaPTo6ku0EWV2Kxc1BA_4xIVLpn42L0/edit?ts=5b9996e2#gid=0)
