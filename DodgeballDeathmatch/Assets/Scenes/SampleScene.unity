@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 1864670711}
   - component: {fileID: 1864670710}
   - component: {fileID: 1864670713}
+  - component: {fileID: 1864670714}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -732,7 +733,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -791,7 +792,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1864670709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.5, y: 0, z: -1}
+  m_LocalPosition: {x: -2.97, y: 0, z: -1.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -822,6 +823,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &1864670714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864670709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7444c74e525e24b35a438c593b39a2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
+    type: 2}
 --- !u!1 &1925242416
 GameObject:
   m_ObjectHideFlags: 0
