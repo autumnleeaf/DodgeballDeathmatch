@@ -9,17 +9,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private GameObject dodgeballPrefab;
 
     private GameObject _dodgeball;
-<<<<<<< HEAD:DodgeballDeathmatch/Assets/Resources/Scripts/PlayerController.cs
     private int balls = 2;
 
-    private void Start()
-    {
-
-        var _ball = PrefabUtility.InstantiatePrefab(
-            Resources.Load("Prefabs/Dodgeball")
-        ) as GameObject;
-
-=======
     private Rigidbody2D _rbody;
     public float _movementSpeed;
 
@@ -27,7 +18,6 @@ public class PlayerController : MonoBehaviour {
     {
         _rbody = GetComponent<Rigidbody2D>();
         Movement = new Movement(_movementSpeed);
->>>>>>> 3d5bbf527208160349910cd37b6015f2fa312fbb:DodgeballDeathmatch/Assets/Scripts/PlayerController.cs
     }
 
     private void Update()
