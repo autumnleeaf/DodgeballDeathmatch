@@ -1,8 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 [TestFixture]
 public class TimerTest
 {
+    private bool? countdown;
+    private object time;
+
     [Test]
 	public void startTimer()
     {
@@ -34,7 +38,7 @@ public class TimerTest
         Assert.True(timer.visible);
 
         timer.display(false);
-        Assert.False(timer.visible);
+        Assert.False(condition: timer.visible);
     }
 
     [Test]
@@ -49,5 +53,46 @@ public class TimerTest
 
         Assert.False(timer.countdown);
         Assert.Equals(timer.time, 0);
+    }
+
+    private void start()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void setTime(int v)
+    {
+        throw new NotImplementedException();
+    }
+
+    private class Timer
+    {
+        internal int time;
+        internal bool? countdown;
+        internal bool? visible;
+
+        public Timer()
+        {
+        }
+
+        internal void display(bool v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void setTime(int v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void start()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
