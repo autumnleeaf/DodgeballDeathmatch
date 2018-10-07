@@ -32,20 +32,20 @@ public class Timer : MonoBehaviour
         {
             if (countdown)
                 if (canCount)
-                    stop();
+                    Stop();
                 else
-                    resume();
+                    Resume();
             else
                 Start();
         }
     }
 
-    public void setTime(float inputTime)
+    public void SetTime(float inputTime)
     {
         mainTimer = inputTime;
     }
 
-    public float getTime()
+    public float GetTime()
     {
         return time;
     }
@@ -57,22 +57,22 @@ public class Timer : MonoBehaviour
         countdown = true;
     }
 
-    public void stop()
+    public void Stop()
     {
         canCount = false;
     }
 
-    public void resume()
+    public void Resume()
     {
         canCount = true;
     }
 
-    public bool isCountingDown()
+    public bool IsCountingDown()
     {
         return countdown;
     }
 
-    public bool isVisible()
+    public bool IsVisible()
     {
         return visible;
     }
