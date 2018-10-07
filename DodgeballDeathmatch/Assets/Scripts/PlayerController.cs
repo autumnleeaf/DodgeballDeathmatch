@@ -14,22 +14,19 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D _rbody;
     public float _movementSpeed;
 
-    private void Start()
-    {
+    private void Start() {
         _rbody = GetComponent<Rigidbody2D>();
         Movement = new Movement(_movementSpeed);
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (Input.GetKeyDown("space") == true && this.balls > 0)
         {
             this.Shoot();
         }
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
 
