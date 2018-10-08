@@ -140,8 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8861dd3655cb34d9d67c7634b312fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiText: {fileID: 1991815380}
-  mainTimer: 5
 --- !u!4 &247559404
 Transform:
   m_ObjectHideFlags: 0
@@ -970,6 +968,7 @@ GameObject:
   - component: {fileID: 1864670711}
   - component: {fileID: 1864670710}
   - component: {fileID: 1864670713}
+  - component: {fileID: 1864670715}
   - component: {fileID: 1864670714}
   m_Layer: 0
   m_Name: Player
@@ -1096,6 +1095,23 @@ MonoBehaviour:
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
   _movementSpeed: 10
+  team: 1
+  balls: 5
+--- !u!58 &1864670715
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1864670709}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1 &1925242416
 GameObject:
   m_ObjectHideFlags: 0
