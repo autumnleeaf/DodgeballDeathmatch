@@ -6,12 +6,18 @@ using UnityEditor;
 
 public class BallTests {
 
-    [Test]
-    public void Ball_Moves_Right_On_Default_Throw() {
-        var ballPrefab = Resources.Load("Prefabs/Dodgeball");
-        var _dodgeball = PrefabUtility.InstantiatePrefab(ballPrefab) as GameObject;
-        _dodgeball.transform.position = new Vector3(0, 0, 0);
+    GameObject _dodgeball;
 
+    [SetUp]
+    public void Run_Before_Each_Test(){
+        var ballPrefab = Resources.Load("Prefabs/Dodgeball");
+        _dodgeball = PrefabUtility.InstantiatePrefab(ballPrefab) as GameObject;
+        _dodgeball.transform.position = new Vector3(0, 0, 0);
+    }
+
+    [Test]
+    public void Ball_Moves_Right_On_Default_Throw() 
+    {
         _dodgeball.GetComponent<BallController>().Throw();
 
         var velocity = _dodgeball.GetComponent<BallController>().rb.velocity;
@@ -22,9 +28,6 @@ public class BallTests {
     [Test]
     public void Ball_Moves_Left_On_NegOne_Direction_Throw()
     {
-        var ballPrefab = Resources.Load("Prefabs/Dodgeball");
-        var _dodgeball = PrefabUtility.InstantiatePrefab(ballPrefab) as GameObject;
-        _dodgeball.transform.position = new Vector3(0, 0, 0);
 
         _dodgeball.GetComponent<BallController>().Throw(-1);
 
