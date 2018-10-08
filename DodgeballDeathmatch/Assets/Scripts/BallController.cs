@@ -5,15 +5,8 @@ using UnityEngine;
 public class BallController : MonoBehaviour {
     public float speed = 16.0f;
     public Rigidbody2D rb;
-    public bool leftball;
 
-
-	// Use this for initialization
-	void Start () {
-        // Moves ball towards right
-        rb.velocity = transform.right * speed;
-        if (leftball) {
-            rb.velocity *= -1;
-        }
-	}
+    public void Throw (int direction = 1) {
+        rb.velocity = direction * transform.right * speed;
+    }
 }
