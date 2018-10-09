@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Movement Movement;
     public float _movementSpeed;
 
+    public int health = 100;
     public int team = 1;
     public int balls = 5;
 
