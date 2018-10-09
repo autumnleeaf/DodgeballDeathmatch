@@ -54,9 +54,12 @@ public class PlayerController : MonoBehaviour
         health -= damage;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D trigger)
     {
-        if (collision is CircleCollider2D)
+        var dodgeball = trigger.gameObject;
+        Debug.Log("Trigger Stay");
+
+        if (trigger is CircleCollider2D)
         {
             string pickupKey = "v";
             if (team == 2) pickupKey = "/";
@@ -64,8 +67,30 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(pickupKey) == true)
             {
                 this.Pickup();
-                Destroy(collision.gameObject);
+                Destroy(dodgeball);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        var dodgeball = trigger.gameObject;
+        Debug.Log("Trigger Enter");
+
+        if (trigger is CircleCollider2D)
+        {
+            dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D trigger)
+    {
+        var dodgeball = trigger.gameObject;
+
+        Debug.Log("Trigger Exit");
+        if (trigger is CircleCollider2D)
+        {
+            dodgeball.GetComponent<BallController>().SetPickupStatus(false);
         }
     }
 
