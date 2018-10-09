@@ -69,6 +69,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        var _ball = collision.gameObject;
+
+        if (_ball.GetComponent<Collider2D>() is CircleCollider2D)
+        {
+            var _ballController = _ball.GetComponent<BallController>();
+            takeDamage(_ballController.damage);
+        }
+    }
+
     void Shoot()
     {
         _dodgeball = Instantiate(dodgeballPrefab) as GameObject;
