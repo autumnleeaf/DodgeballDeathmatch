@@ -21,4 +21,16 @@ public class PlayerTests
         int currentHealth = _player.GetComponent<PlayerController>().health;
         Assert.AreEqual(100, currentHealth);
     }
+
+    [Test]
+    public void Player_Takes_Specified_Damage()
+    {
+        int startingHealth = _player.GetComponent<PlayerController>().health;
+        int damage = 7;
+
+        _player.GetComponent<PlayerController>().takeDamage(damage);
+        int currentHealth = _player.GetComponent<PlayerController>().health;
+
+        Assert.AreEqual(damage, startingHealth - currentHealth);
+    }
 }

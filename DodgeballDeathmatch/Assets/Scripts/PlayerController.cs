@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -46,6 +47,11 @@ public class PlayerController : MonoBehaviour
 
         transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
 
+    }
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
