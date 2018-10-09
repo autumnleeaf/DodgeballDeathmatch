@@ -10,7 +10,7 @@ public class BallController : MonoBehaviour {
 
     private void Start()
     {
-        animator.SetBool("Pickup", false);
+        this.SetPickupStatus(false);
     }
 
     public void Throw (int direction = 1) {
@@ -25,6 +25,5 @@ public class BallController : MonoBehaviour {
     public void SetPickupStatus(bool status)
     {
         animator.SetBool("Pickup", status);
-        Debug.Log(animator.GetBool("Pickup"));
     }
 }
