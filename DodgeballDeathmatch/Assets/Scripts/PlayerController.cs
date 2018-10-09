@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public Movement Movement;
     public float _movementSpeed;
 
+    public int health = 100;
     public int team = 1;
     public int balls = 5;
 
@@ -47,6 +49,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision is CircleCollider2D)
@@ -59,6 +66,21 @@ public class PlayerController : MonoBehaviour
                 this.Pickup();
                 Destroy(collision.gameObject);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var _ball = collision.gameObject;
+
+        if (_ball.GetComponent<Collider2D>() is CircleCollider2D)
+        {
+            var _ballController = _ball.GetComponent<BallController>();
+            this.takeDamage(_ballController.damage);
+        }
+
+        if(health <= 0) {
+            Destroy(this.gameObject);
         }
     }
 
