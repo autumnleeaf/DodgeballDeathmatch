@@ -69,14 +69,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         var _ball = collision.gameObject;
 
         if (_ball.GetComponent<Collider2D>() is CircleCollider2D)
         {
             var _ballController = _ball.GetComponent<BallController>();
-            takeDamage(_ballController.damage);
+            this.takeDamage(_ballController.damage);
+        }
+
+        if(health <= 0) {
+            Destroy(this.gameObject);
         }
     }
 
