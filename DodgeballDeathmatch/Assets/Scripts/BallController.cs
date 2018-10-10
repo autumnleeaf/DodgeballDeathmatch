@@ -15,6 +15,7 @@ public class BallController : MonoBehaviour {
 
     public void Throw (int direction = 1) {
         rb.velocity = direction * transform.right * speed;
+        animator.SetBool("LiveBall", true);
     }
 
     public bool getPickupStatus()
