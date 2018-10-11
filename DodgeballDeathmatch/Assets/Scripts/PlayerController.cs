@@ -100,13 +100,14 @@ public class PlayerController : MonoBehaviour
             var _ballController = dodgeball.GetComponent<BallController>();
 
             if(_ballController.getLiveStatus()){
-                this.takeDamage(_ballController.damage); 
-                StartCoroutine("ResetPhysics");
+                this.takeDamage(_ballController.damage);
                 _ballController.SetLiveStatus(false);
             }
+            StartCoroutine("ResetPhysics");
         }
 
         if(health <= 0) {
+            Destroy(this.gameObject);
         }
     }
 
