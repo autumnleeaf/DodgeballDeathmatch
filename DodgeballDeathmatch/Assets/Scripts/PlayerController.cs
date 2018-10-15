@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,9 +13,10 @@ public class PlayerController : MonoBehaviour
     private GameObject _dodgeball;
     //rivate Rigidbody2D _rbody;
     public Movement Movement;
-    public float _movementSpeed;
     private Animator myAnimator;
+    public float _movementSpeed;
 
+    public int health = 100;
     public int team = 1;
     public int balls = 5;
 
@@ -64,9 +66,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void takeDamage(int damage)
     {
-        if (collision is CircleCollider2D)
+        health -= damage;
+    }
+
+    private void OnTriggerStay2D(Collider2D trigger)
+    {
+        var dodgeball = trigger.gameObject;
+
+        if (dodgeball.GetComponent<BallController>().getPickupStatus())
         {
             string pickupKey = "v";
             if (team == 2) pickupKey = "/";
@@ -74,8 +83,48 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(pickupKey) == true)
             {
                 this.Pickup();
-                Destroy(collision.gameObject);
+                Destroy(dodgeball);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        var dodgeball = trigger.gameObject;
+
+        if (trigger is CircleCollider2D)
+        {
+            dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D trigger)
+    {
+        var dodgeball = trigger.gameObject;
+
+        if (trigger is CircleCollider2D)
+        {
+            dodgeball.GetComponent<BallController>().SetPickupStatus(false);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var dodgeball = collision.gameObject;
+
+        if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
+        {
+            var _ballController = dodgeball.GetComponent<BallController>();
+
+            if(_ballController.getLiveStatus()){
+                this.takeDamage(_ballController.damage);
+                _ballController.SetLiveStatus(false);
+            }
+            StartCoroutine("ResetPhysics");
+        }
+
+        if(health <= 0) {
+            Destroy(this.gameObject);
         }
     }
 
@@ -96,5 +145,13 @@ public class PlayerController : MonoBehaviour
     void Pickup()
     {
         this.balls++;
+    }
+
+    IEnumerator ResetPhysics()
+    {
+        yield return new WaitForSeconds(2f);
+
+        _rbody.velocity = new Vector2(0f, 0f);
+        _rbody.angularVelocity = 0f;
     }
 }
