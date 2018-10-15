@@ -93,12 +93,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var _ball = collision.gameObject;
+        var dodgeball = collision.gameObject;
 
-        if (_ball.GetComponent<Collider2D>() is CircleCollider2D)
+        if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
         {
-            var _ballController = _ball.GetComponent<BallController>();
-            this.takeDamage(_ballController.damage);
+            var _ballController = dodgeball.GetComponent<BallController>();
+
+            if(_ballController.getLiveStatus()){
+                this.takeDamage(_ballController.damage);
+                _ballController.SetLiveStatus(false);
+            }
+            StartCoroutine("ResetPhysics");
         }
 
         if(health <= 0) {
@@ -123,5 +128,13 @@ public class PlayerController : MonoBehaviour
     void Pickup()
     {
         this.balls++;
+    }
+
+    IEnumerator ResetPhysics()
+    {
+        yield return new WaitForSeconds(2f);
+
+        _rbody.velocity = new Vector2(0f, 0f);
+        _rbody.angularVelocity = 0f;
     }
 }

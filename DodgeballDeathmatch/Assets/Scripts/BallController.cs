@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class BallController : MonoBehaviour {
 
     public void Throw (int direction = 1) {
         rb.velocity = direction * transform.right * speed;
+        animator.SetBool("LiveBall", true);
     }
 
     public bool getPickupStatus()
@@ -26,4 +28,30 @@ public class BallController : MonoBehaviour {
     {
         animator.SetBool("Pickup", status);
     }
+
+    public bool getLiveStatus()
+    {
+        return animator.GetBool("LiveBall");
+    }
+
+    public void SetLiveStatus(bool status)
+    {
+        animator.SetBool("LiveBall", status);
+
+        if(status == false){
+            StartCoroutine("SlowToStop");
+        }
+    }
+
+    IEnumerator SlowToStop()
+    {
+        for (float f = 1f; f >= 0; f -= 0.1f)
+        {
+            rb.velocity *= 0.9f;
+            yield return null;
+        }
+
+        rb.velocity *= 0;
+    }
+
 }
