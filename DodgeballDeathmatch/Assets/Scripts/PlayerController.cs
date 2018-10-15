@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float player1maxRight;
     [SerializeField] public float maxPosy;
     private GameObject _dodgeball;
-    private Rigidbody2D _rbody;
+    //rivate Rigidbody2D _rbody;
     public Movement Movement;
     public float _movementSpeed;
     private Animator myAnimator;
