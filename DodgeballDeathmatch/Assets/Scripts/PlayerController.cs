@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
     [SerializeField] public float player1maxLeft;
-    SerializeField] public float player1maxRight;
+    [SerializeField] public float player1maxRight;
     [SerializeField] public float maxPosy;
     private GameObject _dodgeball;
     private Rigidbody2D _rbody;

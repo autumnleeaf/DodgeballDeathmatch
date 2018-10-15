@@ -1197,7 +1197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  maxPosx: 19
+  player1maxLeft: -19
+  player1maxRight: -1
   maxPosy: 8
   _movementSpeed: 10
   team: 1
