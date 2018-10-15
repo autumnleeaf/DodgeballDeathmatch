@@ -6,17 +6,22 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
+    [SerializeField] public float player1maxLeft;
+    SerializeField] public float player1maxRight;
+    [SerializeField] public float maxPosy;
     private GameObject _dodgeball;
     private Rigidbody2D _rbody;
     public Movement Movement;
     public float _movementSpeed;
+    private Animator myAnimator;
 
     public int team = 1;
     public int balls = 5;
 
     private void Start()
     {
-        _rbody = GetComponent<Rigidbody2D>();
+        //_rbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
         Movement = new Movement(_movementSpeed);
     }
 
@@ -36,7 +41,9 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
 
-        if(team == 2) {
+        myAnimator.SetFloat("Speed", Mathf.Abs(horizontal + vertical));
+
+        if (team == 2) {
             horizontal = Input.GetAxisRaw("Horizontal2");
             vertical = Input.GetAxisRaw("Vertical2");
         }
@@ -44,6 +51,11 @@ public class PlayerController : MonoBehaviour
         var deltaTime = Time.deltaTime;
 
         transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
+
+        float xPos = Mathf.Clamp(transform.position.x, player1maxLeft, player1maxRight);
+        float yPos = Mathf.Clamp(transform.position.y, -maxPosy, maxPosy);
+
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
 
     }
 
