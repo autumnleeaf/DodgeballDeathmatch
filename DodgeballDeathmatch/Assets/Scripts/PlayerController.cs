@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
 
+        // Allows the speed component in the animation editor to see player speed
         myAnimator.SetFloat("Speed", Mathf.Abs(horizontal + vertical));
 
         if (team == 2) {
@@ -48,13 +49,17 @@ public class PlayerController : MonoBehaviour
             vertical = Input.GetAxisRaw("Vertical2");
         }
 
+        // Changes game from frame movement to time movement
         var deltaTime = Time.deltaTime;
 
+        // Calculates new position of character when moved
         transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
 
+        // STatements to restrict player 1 movement on the dodgeball court
         float xPos = Mathf.Clamp(transform.position.x, player1maxLeft, player1maxRight);
         float yPos = Mathf.Clamp(transform.position.y, -maxPosy, maxPosy);
 
+        // New position of player 1 after restrictions on court are placed
         transform.position = new Vector3(xPos, yPos, transform.position.z);
 
     }
