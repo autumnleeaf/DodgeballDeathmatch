@@ -7,9 +7,13 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
+    [SerializeField] public float player1maxLeft;
+    [SerializeField] public float player1maxRight;
+    [SerializeField] public float maxPosy;
     private GameObject _dodgeball;
-    private Rigidbody2D _rbody;
+    //rivate Rigidbody2D _rbody;
     public Movement Movement;
+    private Animator myAnimator;
     public float _movementSpeed;
 
     public int health = 100;
@@ -18,7 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _rbody = GetComponent<Rigidbody2D>();
+        //_rbody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
         Movement = new Movement(_movementSpeed);
     }
 
@@ -38,14 +43,26 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
 
-        if(team == 2) {
+        // Allows the speed component in the animation editor to see player speed
+        myAnimator.SetFloat("Speed", Mathf.Abs(horizontal + vertical));
+
+        if (team == 2) {
             horizontal = Input.GetAxisRaw("Horizontal2");
             vertical = Input.GetAxisRaw("Vertical2");
         }
 
+        // Changes game from frame movement to time movement
         var deltaTime = Time.deltaTime;
 
+        // Calculates new position of character when moved
         transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
+
+        // STatements to restrict player 1 movement on the dodgeball court
+        float xPos = Mathf.Clamp(transform.position.x, player1maxLeft, player1maxRight);
+        float yPos = Mathf.Clamp(transform.position.y, -maxPosy, maxPosy);
+
+        // New position of player 1 after restrictions on court are placed
+        transform.position = new Vector3(xPos, yPos, transform.position.z);
 
     }
 
