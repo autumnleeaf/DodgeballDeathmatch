@@ -44,6 +44,14 @@ public class PlayerController : MonoBehaviour
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
 
+        if (team == 2)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal2");
+            vertical = Input.GetAxisRaw("Vertical2");
+
+        }
+
+
         // Allows the speed component in the animation editor to see player speed
         myAnimator.SetFloat(animWord, Mathf.Abs(horizontal + vertical));
 
@@ -60,12 +68,6 @@ public class PlayerController : MonoBehaviour
         // New position of player 1 after restrictions on court are placed
         transform.position = new Vector3(xPos, yPos, transform.position.z);
 
-        if (team == 2) 
-        {
-            horizontal = Input.GetAxisRaw("Horizontal2");
-            vertical = Input.GetAxisRaw("Vertical2");
-
-        }
 
     }
 
