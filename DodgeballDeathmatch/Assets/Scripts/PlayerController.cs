@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         var direction = 1;
         if (team == 2) direction = -1;
 
-        Vector3 instantiationPoint = new Vector3(.25f * direction, 0, 0);
+        Vector3 instantiationPoint = new Vector3(2f * direction, 0, 0);
         _dodgeball.transform.position = transform.TransformPoint(instantiationPoint);
         _dodgeball.GetComponent<BallController>().Throw(direction);
 
@@ -151,6 +151,9 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        Rigidbody2D _rbody = this.gameObject.GetComponent<Rigidbody2D>();
+
+        this.transform.localRotation = Quaternion.identity;
         _rbody.velocity = new Vector2(0f, 0f);
         _rbody.angularVelocity = 0f;
     }
