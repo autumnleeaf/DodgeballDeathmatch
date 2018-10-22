@@ -14,6 +14,14 @@ public class BallController : MonoBehaviour {
         this.SetPickupStatus(false);
     }
 
+    private void OnCollisionEnter2D(Collision2D target)
+    {
+        if (target.gameObject.tag.Equals("End Wall") == true)
+        {
+            SetLiveStatus(false);
+        }
+    }
+
     public void Throw (int direction = 1) {
         rb.velocity = direction * transform.right * speed;
         animator.SetBool("LiveBall", true);
