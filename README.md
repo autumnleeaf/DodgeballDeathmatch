@@ -24,7 +24,7 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
   - Sequence Diagrams
   - etc.
 - [Source Code](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets)
-- [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Editor)
+- [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Tests)
 - Product Demonstration
 
 # Sprint 2
@@ -38,5 +38,5 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
   - Sequence Diagrams
   - etc.
 - [Source Code](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets)
-- [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Editor)
+- [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Tests)
 - Product Demonstration
