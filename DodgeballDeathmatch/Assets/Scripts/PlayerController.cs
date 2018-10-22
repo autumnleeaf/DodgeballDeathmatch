@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        health -= damage;
+        ImageHealthBar.health -= damage;
     }
 
     private void OnTriggerStay2D(Collider2D trigger)
@@ -97,6 +98,8 @@ public class PlayerController : MonoBehaviour
     {
         var dodgeball = trigger.gameObject;
 
+        //ImageHealthBar.health -= 10f;
+
         if (trigger is CircleCollider2D)
         {
             dodgeball.GetComponent<BallController>().SetPickupStatus(true);
@@ -116,6 +119,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var dodgeball = collision.gameObject;
+
 
         if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
         {
