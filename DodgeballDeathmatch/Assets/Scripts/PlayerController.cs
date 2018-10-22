@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
         var direction = 1;
         if (team == 2) direction = -1;
 
-        Vector3 instantiationPoint = new Vector3(2f * direction, 0, 0);
+        Vector3 instantiationPoint = new Vector3(2f, 0, 0);
         _dodgeball.transform.position = transform.TransformPoint(instantiationPoint);
         _dodgeball.GetComponent<BallController>().Throw(direction);
 
