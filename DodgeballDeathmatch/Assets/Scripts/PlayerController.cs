@@ -74,7 +74,14 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage(int damage)
     {
-        ImageHealthBar.health -= damage;
+        if (team == 1)
+        {
+            PlayerHealthBar.healthPlayer -= damage;
+        }
+        else
+        {
+            EnemyHealthBar.healthEnemy -= damage;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D trigger)
@@ -97,8 +104,6 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         var dodgeball = trigger.gameObject;
-
-        //ImageHealthBar.health -= 10f;
 
         if (trigger is CircleCollider2D)
         {
@@ -125,14 +130,16 @@ public class PlayerController : MonoBehaviour
         {
             var _ballController = dodgeball.GetComponent<BallController>();
 
-            if(_ballController.getLiveStatus()){
+            if(_ballController.getLiveStatus())
+            {
                 this.takeDamage(_ballController.damage);
                 _ballController.SetLiveStatus(false);
             }
             StartCoroutine("ResetPhysics");
         }
 
-        if(health <= 0) {
+        if(EnemyHealthBar.healthEnemy <= 0 || PlayerHealthBar.healthPlayer <= 0) 
+        {
             Destroy(this.gameObject);
         }
     }
