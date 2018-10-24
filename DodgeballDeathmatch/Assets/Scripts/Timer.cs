@@ -13,11 +13,21 @@ public class Timer : MonoBehaviour
     private bool visible = true;
     private bool canCount = false;
 
+    public bool stopwatch = false;
+
     private void Update()
     {
-        if (time > 0.0f && canCount)
+        if (canCount)
         {
-            time -= Time.deltaTime;
+            if (stopwatch)
+            {
+                time += Time.deltaTime;
+            }
+            else if (time > 0.0f)
+            {
+                time -= Time.deltaTime;
+            }
+
             uiText.text = time.ToString("F");
         }
         else if (time <= 0.0f && countdown)
@@ -26,17 +36,6 @@ public class Timer : MonoBehaviour
             countdown = false;
             uiText.text = "0.00";
             time = 0.0f;
-        }
-
-        if(Input.GetKeyDown("t"))
-        {
-            if (countdown)
-                if (canCount)
-                    Stop();
-                else
-                    Resume();
-            else
-                Start();
         }
     }
 
@@ -70,6 +69,11 @@ public class Timer : MonoBehaviour
     public bool IsCountingDown()
     {
         return countdown;
+    }
+
+    public bool IsTimerActive()
+    {
+        return canCount;
     }
 
     public bool IsVisible()
