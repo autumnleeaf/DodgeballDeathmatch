@@ -50,12 +50,12 @@ public class TimerTest
         timer.stopwatch = true;
 
         timer.SetTime(0);
-        timer.Start;
+        timer.Start();
 
         System.Threading.Thread.Sleep(1000);
 
         timer.Stop();
-        Assert.False(timer.IsTimerActive);
+        Assert.False(timer.IsTimerActive());
         Assert.GreaterOrEqual(timer.GetTime(), 1.0);
 
         timer.Start();
