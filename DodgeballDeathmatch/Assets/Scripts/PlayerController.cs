@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         var dodgeball = trigger.gameObject;
 
-        if (dodgeball.GetComponent<BallController>().getPickupStatus())
+        if (dodgeball.GetType().ToString() == "BallController" && dodgeball.GetComponent<BallController>().getPickupStatus())
         {
             string pickupKey = "v";
             if (team == 2) pickupKey = "/";
