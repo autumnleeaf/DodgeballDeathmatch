@@ -29,7 +29,7 @@ public class TimerTest
     }
 
     [Test]
-    public void outOfTime()
+    public void OutOfTime()
     {
         var timer = new Timer();
 
@@ -40,5 +40,27 @@ public class TimerTest
 
         Assert.False(timer.IsCountingDown());
         Assert.Equals(timer.GetTime(), 0.0);
+    }
+
+    [Test]
+    public void StopwatchCountsUp()
+    {
+        var timer = new Timer();
+
+        timer.stopwatch = true;
+
+        timer.SetTime(0);
+        timer.Start();
+
+        System.Threading.Thread.Sleep(1000);
+
+        timer.Stop();
+        Assert.False(timer.IsTimerActive());
+        Assert.GreaterOrEqual(timer.GetTime(), 1.0);
+
+        timer.Start();
+        timer.Stop();
+
+        Assert.Less(timer.GetTime(), 1.0);
     }
 }
