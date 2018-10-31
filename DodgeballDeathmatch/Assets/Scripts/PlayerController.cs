@@ -98,8 +98,8 @@ public class PlayerController : MonoBehaviour
             {
                 Player.TakeDamage(_ballController.Damage);
 
+                _ballController.PickupStatus = false;
                 _ballController.LiveStatus = false;
-                _ballController.PickupStatus = true;
 
                 StartCoroutine("ResetPhysics");
             }
