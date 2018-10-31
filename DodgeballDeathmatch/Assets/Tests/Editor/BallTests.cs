@@ -6,7 +6,6 @@ using UnityEditor;
 
 public class BallTests
 {
-
     GameObject _dodgeball;
 
     [SetUp]

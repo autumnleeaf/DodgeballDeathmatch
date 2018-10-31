@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour
     private GameObject _dodgeball;
     private Animator myAnimator;
 
-    private void Start()
+    void Start()
     {
         myAnimator = GetComponent<Animator>();
         Player = new Player(transform.position, team, _movementSpeed);
     }
 
-    private void Update()
+    void Update()
     {
         bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
 
