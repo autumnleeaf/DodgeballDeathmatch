@@ -181,7 +181,7 @@ RectTransform:
   m_LocalScale: {x: 1.0919101, y: 1.0797777, z: 0.9705868}
   m_Children: []
   m_Father: {fileID: 1603507327}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -432,14 +432,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  maxLeft: 1
-  maxRight: 19
-  maxPosy: 8
   animWord: Run
   _movementSpeed: 10
   health: 100
   team: 2
-  balls: 5
 --- !u!61 &602528837
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -686,7 +682,7 @@ RectTransform:
   m_Children:
   - {fileID: 1521054256}
   m_Father: {fileID: 1603507327}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -737,9 +733,8 @@ GameObject:
   - component: {fileID: 811228093}
   - component: {fileID: 811228096}
   - component: {fileID: 811228095}
-  - component: {fileID: 811228094}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: PlayerHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -763,18 +758,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &811228094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 811228092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3662b9c3b90494557a3563fdfefe690f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &811228095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +918,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1603507327}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1204,12 +1187,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403211828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1603507327}
-  m_RootOrder: 1
+  m_Father: {fileID: 1726853266}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1400,9 +1383,8 @@ GameObject:
   - component: {fileID: 1521054256}
   - component: {fileID: 1521054259}
   - component: {fileID: 1521054258}
-  - component: {fileID: 1521054257}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1426,18 +1408,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1521054257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1521054255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0279d1f4c16e48cea47fde6b5eba539, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
 --- !u!114 &1521054258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,7 +1471,7 @@ RectTransform:
   m_Children:
   - {fileID: 811228093}
   m_Father: {fileID: 1726853266}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1627,13 +1597,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 796377517}
-  - {fileID: 1403211829}
   - {fileID: 969262225}
+  - {fileID: 796377517}
   - {fileID: 249753150}
   - {fileID: 1738536377}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1851,6 +1820,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1403211829}
   - {fileID: 1528366080}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -1888,7 +1858,7 @@ RectTransform:
   m_LocalScale: {x: 1.0919105, y: 1.0797805, z: 0.97059}
   m_Children: []
   m_Father: {fileID: 1603507327}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2103,7 +2073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1864670709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.29, y: -0.45, z: -2}
+  m_LocalPosition: {x: -11.6, y: -0.06, z: -2}
   m_LocalScale: {x: 0.9624119, y: 0.9624119, z: 0.9624119}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2147,14 +2117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  maxLeft: -19
-  maxRight: -1
-  maxPosy: 8
   animWord: Speed
   _movementSpeed: 10
   health: 100
   team: 1
-  balls: 5
 --- !u!95 &1864670715
 Animator:
   serializedVersion: 3
@@ -2187,7 +2153,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
 --- !u!1 &1925242416
 GameObject:
   m_ObjectHideFlags: 0
