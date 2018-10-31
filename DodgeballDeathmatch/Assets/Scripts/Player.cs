@@ -25,7 +25,11 @@ namespace DodgeballDeathmatch
 
         public List<GameObject> ReachableDodgeballs { get; private set; }
 
-        public Player(Vector3 position, int team, float _movementSpeed)
+        public int Health { get; private set; }
+
+        public int Team { get; private set; }
+
+        public Player(Vector3 position, int team = 1, float _movementSpeed = 10f)
         {
             // Initialize Movement class
             Movement = new Movement(_movementSpeed);
@@ -35,6 +39,10 @@ namespace DodgeballDeathmatch
             MaxPosy = 8;
 
             BallCount = 5;
+
+            Health = 100;
+
+            Team = team;
 
             ReachableDodgeballs = new List<GameObject>();
 
@@ -98,6 +106,11 @@ namespace DodgeballDeathmatch
             UnityEngine.Object.Destroy(closestBall);
 
             BallCount += 1;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
         }
 
         public void ThrowBall()

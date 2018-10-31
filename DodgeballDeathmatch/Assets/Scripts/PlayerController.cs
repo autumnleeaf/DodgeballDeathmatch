@@ -9,11 +9,10 @@ using DodgeballDeathmatch;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
-
-    public Player Player;
-
     [SerializeField] public string animWord;
 
+
+    public Player Player;
     public Movement Movement;
     public float _movementSpeed;
 
@@ -92,28 +91,17 @@ public class PlayerController : MonoBehaviour
 
             if(_ballController.getLiveStatus())
             {
-                this.takeDamage(_ballController.damage);
+                Player.TakeDamage(_ballController.damage);
+
                 _ballController.SetLiveStatus(false);
             }
 
             StartCoroutine("ResetPhysics");
         }
 
-        if(EnemyHealthBar.healthEnemy <= 0 || PlayerHealthBar.healthPlayer <= 0) 
+        if(Player.Health <= 0) 
         {
             Destroy(this.gameObject);
-        }
-    }
-
-    public void takeDamage(int damage)
-    {
-        if (team == 1)
-        {
-            PlayerHealthBar.healthPlayer -= damage;
-        }
-        else
-        {
-            EnemyHealthBar.healthEnemy -= damage;
         }
     }
 
