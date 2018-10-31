@@ -26,11 +26,18 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         myAnimator = GetComponent<Animator>();
-        Player = new Player(team, _movementSpeed);
+        Player = new Player(transform.position, team, _movementSpeed);
     }
 
     private void Update()
     {
+        bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
+
+        if (pickupKeyDown && Player.ReachableDodgeballs.Count > 0)
+        {
+            Player.PickupBall();
+        }
+
         bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
 
         if (throwKeyDown && Player.BallCount > 0)
@@ -47,53 +54,37 @@ public class PlayerController : MonoBehaviour
         // Allows the speed component in the animation editor to see player speed
         myAnimator.SetFloat(animWord, Mathf.Abs(horizontal + vertical));
 
-        // Changes game from frame movement to time movement
-        var deltaTime = Time.deltaTime;
-
         // Set position to new calculated player postion
-        transform.position = Player.CalculateNewPosition(transform.position, horizontal, vertical, deltaTime);
-    }
-
-    private void OnTriggerStay2D(Collider2D trigger)
-    {
-        var dodgeball = trigger.gameObject;
-
-        if (dodgeball.GetType().ToString() == "BallController" && dodgeball.GetComponent<BallController>().getPickupStatus())
-        {
-            bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
-
-            if (pickupKeyDown)
-            {
-                Player.PickupBall();
-                Destroy(dodgeball);
-            }
-        }
+        transform.position = Player.CalculateNewPosition(transform.position, horizontal, vertical, Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        var dodgeball = trigger.gameObject;
-
         if (trigger is CircleCollider2D)
         {
+            var dodgeball = trigger.gameObject;
+
             dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+
+            Player.AddToReachable(dodgeball);
         }
     }
 
     private void OnTriggerExit2D(Collider2D trigger)
     {
-        var dodgeball = trigger.gameObject;
-
         if (trigger is CircleCollider2D)
         {
+            var dodgeball = trigger.gameObject;
+
             dodgeball.GetComponent<BallController>().SetPickupStatus(false);
+
+            Player.RemoveFromReachable(dodgeball);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var dodgeball = collision.gameObject;
-
 
         if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
         {
@@ -104,6 +95,7 @@ public class PlayerController : MonoBehaviour
                 this.takeDamage(_ballController.damage);
                 _ballController.SetLiveStatus(false);
             }
+
             StartCoroutine("ResetPhysics");
         }
 
