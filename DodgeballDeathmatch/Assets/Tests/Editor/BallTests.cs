@@ -46,17 +46,17 @@ public class BallTests
         [Test]
         public void Ball_Pickup_Sets_To_True_With_SetPickupStatus()
         {
-            _dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+            _dodgeball.GetComponent<BallController>().PickupStatus = true;
 
-            Assert.IsTrue(_dodgeball.GetComponent<BallController>().getPickupStatus());
+            Assert.IsTrue(_dodgeball.GetComponent<BallController>().PickupStatus);
         }
 
         [Test]
         public void Ball_Pickup_Sets_To_False_With_SetPickupStatus()
         {
-            _dodgeball.GetComponent<BallController>().SetPickupStatus(false);
+            _dodgeball.GetComponent<BallController>().PickupStatus = false;
 
-            Assert.IsFalse(_dodgeball.GetComponent<BallController>().getPickupStatus());
+            Assert.IsFalse(_dodgeball.GetComponent<BallController>().PickupStatus);
         }
     }
 }

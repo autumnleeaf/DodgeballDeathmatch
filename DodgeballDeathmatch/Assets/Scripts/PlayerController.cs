@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
         {
             this.Throw();
         }
+
+        if (Player.Health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -63,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+            dodgeball.GetComponent<BallController>().PickupStatus = true;
 
             Player.AddToReachable(dodgeball);
         }
@@ -75,7 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            dodgeball.GetComponent<BallController>().SetPickupStatus(false);
+            dodgeball.GetComponent<BallController>().PickupStatus = false;
 
             Player.RemoveFromReachable(dodgeball);
         }
@@ -83,25 +88,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var dodgeball = collision.gameObject;
-
-        if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
+        if (collision.gameObject.GetComponent<Collider2D>() is CircleCollider2D)
         {
+            var dodgeball = collision.gameObject;
+
             var _ballController = dodgeball.GetComponent<BallController>();
 
-            if(_ballController.getLiveStatus())
+            if(_ballController.LiveStatus)
             {
-                Player.TakeDamage(_ballController.damage);
+                Player.TakeDamage(_ballController.Damage);
 
-                _ballController.SetLiveStatus(false);
+                _ballController.LiveStatus = false;
+                _ballController.PickupStatus = true;
+
+                StartCoroutine("ResetPhysics");
             }
-
-            StartCoroutine("ResetPhysics");
-        }
-
-        if(Player.Health <= 0) 
-        {
-            Destroy(this.gameObject);
         }
     }
 
