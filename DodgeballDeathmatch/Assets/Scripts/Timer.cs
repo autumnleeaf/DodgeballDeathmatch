@@ -1,79 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private Text uiText;
-    [SerializeField] private float mainTimer;
+    Text uiText;
+    public int CounterStart = 99;
+    public bool timerOn = false;
 
-    private float time;
-    private bool countdown = false;
-    private bool visible = true;
-    private bool canCount = false;
+    private int counter;
+    private float timer;
 
-    private void Update()
-    {
-        if (time > 0.0f && canCount)
+    public int Current 
+    { 
+        get
         {
-            time -= Time.deltaTime;
-            uiText.text = time.ToString("F");
-        }
-        else if (time <= 0.0f && countdown)
+            return counter;
+        } 
+        set
         {
-            canCount = false;
-            countdown = false;
-            uiText.text = "0.00";
-            time = 0.0f;
-        }
+            value = Math.Min(CounterStart, value);
+            counter = Math.Max(0, value);
+        } 
+    }
 
-        if(Input.GetKeyDown("t"))
+    void Start()
+    {
+        uiText = GetComponent<Text>();
+        Current = CounterStart;
+        timer = 0f;
+        uiText.text = CounterStart.ToString();
+    }
+
+    void Update()
+    {
+        UpdateCounter(Time.deltaTime);
+
+        uiText.text = Current.ToString();
+    }
+
+    public void StartTimer(){
+        if(!timerOn)
         {
-            if (countdown)
-                if (canCount)
-                    Stop();
-                else
-                    Resume();
-            else
-                Start();
+            timer = 0f;
+            timerOn = true;
         }
     }
 
-    public void SetTime(float inputTime)
+    public void UpdateCounter(float seconds)
     {
-        mainTimer = inputTime;
-    }
+        if (timerOn)
+        {
+            timer += seconds;
 
-    public float GetTime()
-    {
-        return time;
-    }
-
-    public void Start()
-    {
-        time = mainTimer;
-        canCount = true;
-        countdown = true;
-    }
-
-    public void Stop()
-    {
-        canCount = false;
-    }
-
-    public void Resume()
-    {
-        canCount = true;
-    }
-
-    public bool IsCountingDown()
-    {
-        return countdown;
-    }
-
-    public bool IsVisible()
-    {
-        return visible;
+            Current = CounterStart - Mathf.CeilToInt(timer);
+        }
     }
 }

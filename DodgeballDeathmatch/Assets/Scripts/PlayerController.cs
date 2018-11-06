@@ -2,82 +2,132 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
+using UnityEngine.UI;
+using DodgeballDeathmatch;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
-    private GameObject _dodgeball;
-    private Rigidbody2D _rbody;
+    [SerializeField] public string animWord;
+
+
+    public Player Player;
     public Movement Movement;
     public float _movementSpeed;
 
+    public int health = 100;
     public int team = 1;
-    public int balls = 5;
 
-    private void Start()
+    private GameObject _dodgeball;
+    private Animator myAnimator;
+
+    void Start()
     {
-        _rbody = GetComponent<Rigidbody2D>();
-        Movement = new Movement(_movementSpeed);
+        myAnimator = GetComponent<Animator>();
+        Player = new Player(transform.position, team, _movementSpeed);
     }
 
-    private void Update()
+    void Update()
     {
-        string shootKey = "c";
-        if (team == 2) shootKey = ".";
+        bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
 
-        if (Input.GetKeyDown(shootKey) == true && this.balls > 0)
+        if (pickupKeyDown && Player.ReachableDodgeballs.Count > 0)
         {
-            this.Shoot();
+            Player.PickupBall();
+        }
+
+        bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
+
+        if (throwKeyDown && Player.BallCount > 0)
+        {
+            this.Throw();
+        }
+
+        if (Player.Health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 
     private void FixedUpdate()
     {
-        var horizontal = Input.GetAxisRaw("Horizontal");
-        var vertical = Input.GetAxisRaw("Vertical");
+        var horizontal = Input.GetAxisRaw(Player.HoriztonalAxisName);
+        var vertical = Input.GetAxisRaw(Player.VerticalAxisName);
 
-        if(team == 2) {
-            horizontal = Input.GetAxisRaw("Horizontal2");
-            vertical = Input.GetAxisRaw("Vertical2");
-        }
+        // Allows the speed component in the animation editor to see player speed
+        myAnimator.SetFloat(animWord, Mathf.Abs(horizontal + vertical));
 
-        var deltaTime = Time.deltaTime;
-
-        transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
-
+        // Set position to new calculated player postion
+        transform.position = Player.CalculateNewPosition(transform.position, horizontal, vertical, Time.deltaTime);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (collision is CircleCollider2D)
+        if (trigger is CircleCollider2D)
         {
-            string pickupKey = "v";
-            if (team == 2) pickupKey = "/";
+            var dodgeball = trigger.gameObject;
 
-            if (Input.GetKeyDown(pickupKey) == true)
+            dodgeball.GetComponent<BallController>().PickupStatus = true;
+
+            Player.AddToReachable(dodgeball);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D trigger)
+    {
+        if (trigger is CircleCollider2D)
+        {
+            var dodgeball = trigger.gameObject;
+
+            dodgeball.GetComponent<BallController>().PickupStatus = false;
+
+            Player.RemoveFromReachable(dodgeball);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Collider2D>() is CircleCollider2D)
+        {
+            var dodgeball = collision.gameObject;
+
+            var _ballController = dodgeball.GetComponent<BallController>();
+
+            if(_ballController.LiveStatus)
             {
-                this.Pickup();
-                Destroy(collision.gameObject);
+                Player.TakeDamage(_ballController.Damage);
+
+                _ballController.PickupStatus = false;
+                _ballController.LiveStatus = false;
+
+                StartCoroutine("ResetPhysics");
             }
         }
     }
 
-    void Shoot()
+    void Throw()
     {
         _dodgeball = Instantiate(dodgeballPrefab) as GameObject;
 
         var direction = 1;
         if (team == 2) direction = -1;
 
-        Vector3 instantiationPoint = new Vector3(.25f * direction, 0, 0);
+        Vector3 instantiationPoint = new Vector3(2f, 0, 0);
         _dodgeball.transform.position = transform.TransformPoint(instantiationPoint);
         _dodgeball.GetComponent<BallController>().Throw(direction);
 
-        this.balls--;
+        Player.ThrowBall();
     }
 
-    void Pickup()
+    IEnumerator ResetPhysics()
     {
-        this.balls++;
+        yield return new WaitForSeconds(2f);
+
+        Rigidbody2D _rbody = this.gameObject.GetComponent<Rigidbody2D>();
+
+        this.transform.localRotation = Quaternion.identity;
+        _rbody.velocity = new Vector2(0f, 0f);
+        _rbody.angularVelocity = 0f;
     }
 }
