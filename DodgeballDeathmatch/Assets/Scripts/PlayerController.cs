@@ -3,137 +3,110 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.UI;
+using DodgeballDeathmatch;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject dodgeballPrefab;
-    [SerializeField] public float maxLeft;
-    [SerializeField] public float maxRight;
-    [SerializeField] public float maxPosy;
     [SerializeField] public string animWord;
-    private GameObject _dodgeball;
-    //rivate Rigidbody2D _rbody;
+
+
+    public Player Player;
     public Movement Movement;
-    private Animator myAnimator;
     public float _movementSpeed;
 
     public int health = 100;
     public int team = 1;
-    public int balls = 5;
 
-    private void Start()
+    private GameObject _dodgeball;
+    private Animator myAnimator;
+
+    void Start()
     {
-        //_rbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        Movement = new Movement(_movementSpeed);
+        Player = new Player(transform.position, team, _movementSpeed);
     }
 
-    private void Update()
+    void Update()
     {
-        string shootKey = "c";
-        if (team == 2) shootKey = ".";
+        bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
 
-        if (Input.GetKeyDown(shootKey) == true && this.balls > 0)
+        if (pickupKeyDown && Player.ReachableDodgeballs.Count > 0)
         {
-            this.Shoot();
+            Player.PickupBall();
+        }
+
+        bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
+
+        if (throwKeyDown && Player.BallCount > 0)
+        {
+            this.Throw();
+        }
+
+        if (Player.Health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 
     private void FixedUpdate()
     {
-        var horizontal = Input.GetAxisRaw("Horizontal");
-        var vertical = Input.GetAxisRaw("Vertical");
-
-        if (team == 2)
-        {
-            horizontal = Input.GetAxisRaw("Horizontal2");
-            vertical = Input.GetAxisRaw("Vertical2");
-
-        }
-
+        var horizontal = Input.GetAxisRaw(Player.HoriztonalAxisName);
+        var vertical = Input.GetAxisRaw(Player.VerticalAxisName);
 
         // Allows the speed component in the animation editor to see player speed
         myAnimator.SetFloat(animWord, Mathf.Abs(horizontal + vertical));
 
-        // Changes game from frame movement to time movement
-        var deltaTime = Time.deltaTime;
-
-        // Calculates new position of character when moved
-        transform.position += Movement.Calculate(horizontal, vertical, deltaTime);
-
-        // STatements to restrict player 1 movement on the dodgeball court
-        float xPos = Mathf.Clamp(transform.position.x, maxLeft, maxRight);
-        float yPos = Mathf.Clamp(transform.position.y, -maxPosy, maxPosy);
-
-        // New position of player 1 after restrictions on court are placed
-        transform.position = new Vector3(xPos, yPos, transform.position.z);
-
-
-    }
-
-    public void takeDamage(int damage)
-    {
-        health -= damage;
-    }
-
-    private void OnTriggerStay2D(Collider2D trigger)
-    {
-        var dodgeball = trigger.gameObject;
-
-        if (dodgeball.GetComponent<BallController>().getPickupStatus())
-        {
-            string pickupKey = "v";
-            if (team == 2) pickupKey = "/";
-
-            if (Input.GetKeyDown(pickupKey) == true)
-            {
-                this.Pickup();
-                Destroy(dodgeball);
-            }
-        }
+        // Set position to new calculated player postion
+        transform.position = Player.CalculateNewPosition(transform.position, horizontal, vertical, Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        var dodgeball = trigger.gameObject;
-
         if (trigger is CircleCollider2D)
         {
-            dodgeball.GetComponent<BallController>().SetPickupStatus(true);
+            var dodgeball = trigger.gameObject;
+
+            dodgeball.GetComponent<BallController>().PickupStatus = true;
+
+            Player.AddToReachable(dodgeball);
         }
     }
 
     private void OnTriggerExit2D(Collider2D trigger)
     {
-        var dodgeball = trigger.gameObject;
-
         if (trigger is CircleCollider2D)
         {
-            dodgeball.GetComponent<BallController>().SetPickupStatus(false);
+            var dodgeball = trigger.gameObject;
+
+            dodgeball.GetComponent<BallController>().PickupStatus = false;
+
+            Player.RemoveFromReachable(dodgeball);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var dodgeball = collision.gameObject;
-
-        if (dodgeball.GetComponent<Collider2D>() is CircleCollider2D)
+        if (collision.gameObject.GetComponent<Collider2D>() is CircleCollider2D)
         {
+            var dodgeball = collision.gameObject;
+
             var _ballController = dodgeball.GetComponent<BallController>();
 
-            if(_ballController.getLiveStatus()){
-                this.takeDamage(_ballController.damage);
-                _ballController.SetLiveStatus(false);
-            }
-            StartCoroutine("ResetPhysics");
-        }
+            if(_ballController.LiveStatus)
+            {
+                Player.TakeDamage(_ballController.Damage);
 
-        if(health <= 0) {
-            Destroy(this.gameObject);
+                _ballController.PickupStatus = false;
+                _ballController.LiveStatus = false;
+
+                StartCoroutine("ResetPhysics");
+            }
         }
     }
 
-    void Shoot()
+    void Throw()
     {
         _dodgeball = Instantiate(dodgeballPrefab) as GameObject;
 
@@ -144,12 +117,7 @@ public class PlayerController : MonoBehaviour
         _dodgeball.transform.position = transform.TransformPoint(instantiationPoint);
         _dodgeball.GetComponent<BallController>().Throw(direction);
 
-        this.balls--;
-    }
-
-    void Pickup()
-    {
-        this.balls++;
+        Player.ThrowBall();
     }
 
     IEnumerator ResetPhysics()

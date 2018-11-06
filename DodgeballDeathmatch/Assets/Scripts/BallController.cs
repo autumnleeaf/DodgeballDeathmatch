@@ -4,54 +4,60 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour {
-    public float speed = 16.0f;
+    public float throwSpeed = 16.0f;
     public Rigidbody2D rb;
     public Animator animator;
-    public int damage = 5;
+    public int Damage = 5;
 
-    private void Start()
+    public bool PickupStatus {
+        get {
+            return animator.GetBool("Pickup");
+        }
+
+        set {
+            animator.SetBool("Pickup", value);
+        }
+    }
+
+    public bool LiveStatus
     {
-        this.SetPickupStatus(false);
+        get
+        {
+            return animator.GetBool("LiveBall");
+        }
+
+        set
+        {
+            animator.SetBool("LiveBall", value);
+        }
+    }
+
+    private void Update()
+    {
+        GetComponent<Collider2D>().isTrigger = !LiveStatus;
+
+        // Makes sure if ball is set to dead, then ball is stopped
+        if (!LiveStatus)
+        {
+            rb.velocity *= 0;
+        }
+        // Makes sure if ball is stopped, then ball is set to dead
+        if (Math.Abs(Vector2.Distance(rb.velocity, Vector2.zero)) < 0.01f){
+            LiveStatus = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D target)
+    {
+        if (target.gameObject.tag.Equals("End Wall") == true)
+        {
+            LiveStatus = false;
+        }
     }
 
     public void Throw (int direction = 1) {
-        rb.velocity = direction * transform.right * speed;
-        animator.SetBool("LiveBall", true);
-    }
-
-    public bool getPickupStatus()
-    {
-        return animator.GetBool("Pickup");
-    }
-
-    public void SetPickupStatus(bool status)
-    {
-        animator.SetBool("Pickup", status);
-    }
-
-    public bool getLiveStatus()
-    {
-        return animator.GetBool("LiveBall");
-    }
-
-    public void SetLiveStatus(bool status)
-    {
-        animator.SetBool("LiveBall", status);
-
-        if(status == false){
-            StartCoroutine("SlowToStop");
-        }
-    }
-
-    IEnumerator SlowToStop()
-    {
-        for (float f = 1f; f >= 0; f -= 0.1f)
-        {
-            rb.velocity *= 0.9f;
-            yield return null;
-        }
-
-        rb.velocity *= 0;
+        rb.velocity = direction * transform.right * throwSpeed;
+        LiveStatus = true;
     }
 
 }
