@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class KnifeScript : MonoBehaviour {
 
+    int knifeDamage = 3;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -23,8 +25,10 @@ public class KnifeScript : MonoBehaviour {
         // Statement to decrease player score if it collides with the knife
         if (collision.gameObject.tag == "Player")
         {
-            //Decrement Score
+            var Player = collision.gameObject.GetComponent<PlayerController>().Player;
 
+            //Decrement Score
+            Player.TakeDamage(knifeDamage);
             Destroy(gameObject);
         }
         // Statement to destory the knife if the player avoids it
