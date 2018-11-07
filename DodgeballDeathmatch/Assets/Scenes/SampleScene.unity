@@ -211,11 +211,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4111996029030276, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.49
+      value: 9.91
       objectReference: {fileID: 0}
     - target: {fileID: 4111996029030276, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 6.26
+      value: 6.87
       objectReference: {fileID: 0}
     - target: {fileID: 4111996029030276, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
       propertyPath: m_LocalPosition.z
@@ -243,7 +243,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1473971383146780, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 70089143033966610, guid: 1014b2d13838146568bd9e2125a5afbf,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
@@ -398,6 +403,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &443735344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1473971383146780, guid: 1014b2d13838146568bd9e2125a5afbf,
+    type: 2}
+  m_PrefabInternal: {fileID: 184394711}
+--- !u!114 &443735349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443735344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71bda2c493a074bc49e2fda3ff783948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +512,7 @@ GameObject:
   - component: {fileID: 602528841}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2022,7 +2043,7 @@ GameObject:
   - component: {fileID: 1864670716}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
