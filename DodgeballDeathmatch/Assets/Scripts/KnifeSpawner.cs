@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeSpawner : MonoBehaviour 
+public class KnifeSpawner : MonoBehaviour
 {
     [SerializeField]
     float maxX;
 
-    public GameObject knife;
+    public GameObject[] Knives;
 
 	// Use this for initialization
 	void Start () 
     {
-		
+        SpawnKnife();
 	}
 	
 	// Update is called once per frame
@@ -21,9 +21,11 @@ public class KnifeSpawner : MonoBehaviour
 		
 	}
 
-    // FUnction to randomly spawn knives throughout the dodgeball court
+    // Function to randomly spawn knives throughout the dodgeball court
     void SpawnKnife()
     {
-        Instantiate(knife, transform.position, transform.rotation);
+        int rand = Random.Range(0, Knives.Length);
+
+        Instantiate(Knives[rand], transform.position, transform.rotation);
     }
 }
