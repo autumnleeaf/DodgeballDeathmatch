@@ -24,8 +24,13 @@ public class KnifeSpawner : MonoBehaviour
     // Function to randomly spawn knives throughout the dodgeball court
     void SpawnKnife()
     {
+        // Statement to choose a random object
         int rand = Random.Range(0, Knives.Length);
 
-        Instantiate(Knives[rand], transform.position, transform.rotation);
+        // Statement to chose where in the knives object will fall
+        float randomX = Random.Range(-maxX, maxX);
+        Vector3 randomPos = new Vector3(randomX, transform.position.y, transform.position.z);
+
+        Instantiate(Knives[rand], randomPos, transform.rotation);
     }
 }
