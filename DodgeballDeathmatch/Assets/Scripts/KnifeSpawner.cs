@@ -7,12 +7,15 @@ public class KnifeSpawner : MonoBehaviour
     [SerializeField]
     float maxX;
 
+    [SerializeField]
+    float spawnInterval;
+
     public GameObject[] Knives;
 
 	// Use this for initialization
 	void Start () 
     {
-        SpawnKnife();
+        StartSpawningKnives();
 	}
 	
 	// Update is called once per frame
@@ -31,6 +34,32 @@ public class KnifeSpawner : MonoBehaviour
         float randomX = Random.Range(-maxX, maxX);
         Vector3 randomPos = new Vector3(randomX, transform.position.y, transform.position.z);
 
+        // Show knife on screen to interact with player
         Instantiate(Knives[rand], randomPos, transform.rotation);
     }
+
+    // Call routine to create delay before spawning more knives
+    IEnumerator SpawnKnives()
+    {
+        yield return new WaitForSeconds(2f);
+
+        while(true)
+        {
+            SpawnKnife();
+
+            yield return new WaitForSeconds(spawnInterval);
+
+        }
+    }
+
+    public void StartSpawningKnives()
+    {
+        StartCoroutine("SpawnKnives");
+    }
+
+    public void StopSpawningKnives()
+    {
+        StopCoroutine("SpawnKnives");
+    }
+
 }
