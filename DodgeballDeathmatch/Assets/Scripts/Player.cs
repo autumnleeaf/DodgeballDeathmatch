@@ -101,8 +101,6 @@ namespace DodgeballDeathmatch
                 }
             }
 
-            RemoveFromReachable(closestBall);
-
             UnityEngine.Object.Destroy(closestBall);
 
             BallCount += 1;
