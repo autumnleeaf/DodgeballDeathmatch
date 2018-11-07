@@ -15,4 +15,16 @@ public class KnifeScript : MonoBehaviour {
     {
 		
 	}
+
+    // This function will be called whenever the knife collides with a 
+    // player game object.
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            //Decrement Score
+
+            Destroy(gameObject);
+        }
+    }
 }
