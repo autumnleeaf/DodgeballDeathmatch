@@ -35,11 +35,11 @@ public class ObjectSpawner : MonoBehaviour
         }
         else if (currentTime < 50 && currentTime > 25)
         {
-            spawnInterval = 0.3f;
+            spawnInterval = 0.5f;
         }
         else if (currentTime < 25)
         {
-            spawnInterval = 0.1f;
+            spawnInterval = 0.3f;
         }
     }
 
@@ -95,7 +95,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             SpawnHeart();
 
-            yield return new WaitForSeconds(spawnInterval*5);
+            yield return new WaitForSeconds(spawnInterval+8);
 
         }
     }
