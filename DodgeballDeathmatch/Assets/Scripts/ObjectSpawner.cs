@@ -10,7 +10,7 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField]
     float spawnInterval;
 
-    public GameObject[] Knives;
+    public GameObject Knife;
     public GameObject Heart;
 
 	// Use this for initialization
@@ -39,22 +39,17 @@ public class ObjectSpawner : MonoBehaviour
         }
         else if (currentTime < 25)
         {
-            spawnInterval = 0f;
+            spawnInterval = 0.1f;
         }
     }
 
     // Function to randomly spawn knives throughout the dodgeball court
     void SpawnKnife()
     {
-        // Statement to choose a random object
-        int rand = Random.Range(0, Knives.Length);
-
-        // Statement to chose where in the knives object will fall
-        float randomX = Random.Range(-maxX, maxX);
-        Vector3 randomPos = new Vector3(randomX, transform.position.y, transform.position.z);
+        Vector3 randomKnifepos = RandomXposition();
 
         // Show knife on screen to interact with player
-        Instantiate(Knives[rand], randomPos, transform.rotation);
+        Instantiate(Knife, randomKnifepos, transform.rotation);
     }
 
     // Function to randomly spawn knives throughout the dodgeball court
@@ -62,7 +57,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         Vector3 randomHeartpos = RandomXposition();
 
-        // Show knife on screen to interact with player
+        // Show heart on screen to interact with player
         Instantiate(Heart, randomHeartpos, transform.rotation);
     }
 
@@ -94,13 +89,13 @@ public class ObjectSpawner : MonoBehaviour
     // Call routine to create delay before spawning a heart
     IEnumerator SpawnHearts()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(50f);
 
         while (true)
         {
             SpawnHeart();
 
-            yield return new WaitForSeconds(spawnInterval*2);
+            yield return new WaitForSeconds(spawnInterval*5);
 
         }
     }
