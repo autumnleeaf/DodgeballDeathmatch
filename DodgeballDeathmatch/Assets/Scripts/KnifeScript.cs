@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class KnifeScript : MonoBehaviour {
 
-    int knifeDamage = 3;
+
+    public int knifeDamage = 5;
 
 	// Use this for initialization
 	void Start () 
@@ -23,7 +24,7 @@ public class KnifeScript : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D collision)
     {
         // Statement to decrease player score if it collides with the knife
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && collision is BoxCollider2D)
         {
             var Player = collision.gameObject.GetComponent<PlayerController>().Player;
 
