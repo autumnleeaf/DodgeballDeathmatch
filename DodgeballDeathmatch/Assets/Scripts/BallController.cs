@@ -34,8 +34,6 @@ public class BallController : MonoBehaviour {
 
     private void Update()
     {
-        GetComponent<Collider2D>().isTrigger = !LiveStatus;
-
         // Makes sure if ball is set to dead, then ball is stopped
         if (!LiveStatus)
         {

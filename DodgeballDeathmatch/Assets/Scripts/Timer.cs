@@ -56,6 +56,13 @@ public class Timer : MonoBehaviour
             timer += seconds;
 
             Current = CounterStart - Mathf.CeilToInt(timer);
+
+            if(timer <= 0f)
+            {
+                timerOn = false;
+
+                // Insert screen saying both teams failed to kill their opponent. BOTH lose!
+            }
         }
     }
 }
