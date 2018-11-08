@@ -1,14 +1,14 @@
 #! /bin/sh
 
-project="<YOUR PROJECT NAME HERE>"
+project="DodgeballDeathmatch"
 
 echo "Attempting to build $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity 
   -batchmode 
   -nographics 
   -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath $(pwd) 
+  -logFile $(pwd)/$project/unity.log 
+  -projectPath $(pwd)/$project 
   -buildWindowsPlayer "$(pwd)/Build/windows/$project.exe" 
   -quit
 
@@ -17,9 +17,9 @@ echo "Attempting to build $project for OS X"
   -batchmode 
   -nographics 
   -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath $(pwd) 
-  -buildOSXUniversalPlayer "$(pwd)/Build/osx/$project.app" 
+  -logFile $(pwd)/$project/unity.log 
+  -projectPath $(pwd)/$project 
+  -buildOSXUniversalPlayer "$(pwd)/$project/Build/osx/$project.app" 
   -quit
 
 echo "Attempting to build $project for Linux"
@@ -27,16 +27,16 @@ echo "Attempting to build $project for Linux"
   -batchmode 
   -nographics 
   -silent-crashes 
-  -logFile $(pwd)/unity.log 
-  -projectPath $(pwd) 
-  -buildLinuxUniversalPlayer "$(pwd)/Build/linux/$project.exe" 
+  -logFile $(pwd)/$project/unity.log 
+  -projectPath $(pwd)/$project 
+  -buildLinuxUniversalPlayer "$(pwd)/$project/Build/linux/$project.exe" 
   -quit
 
 echo 'Logs from build'
-cat $(pwd)/unity.log
+cat $(pwd)/$project/unity.log
 
 
 echo 'Attempting to zip builds'
-zip -r $(pwd)/Build/linux.zip $(pwd)/Build/linux/
-zip -r $(pwd)/Build/mac.zip $(pwd)/Build/osx/
-zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
+zip -r $(pwd)/$project/Build/linux.zip $(pwd)/$project/Build/linux/
+zip -r $(pwd)/$project/Build/mac.zip $(pwd)/$project/Build/osx/
+zip -r $(pwd)/$project/Build/windows.zip $(pwd)/$project/Build/windows/
