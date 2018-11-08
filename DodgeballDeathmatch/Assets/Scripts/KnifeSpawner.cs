@@ -17,12 +17,30 @@ public class KnifeSpawner : MonoBehaviour
     {
         StartSpawningKnives();
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Update is called once per frame
+    // As the time intveral decreases the number of knives spawned increases
+    void Update()
     {
-		
-	}
+        int currentTime = GameObject.Find("Timer").GetComponent<Timer>().Current;
+
+        if(currentTime > 75 )
+        {
+            spawnInterval = 3f;
+        }
+        else if (currentTime < 75 && currentTime > 50)
+        {
+            spawnInterval = 1f;
+        }
+        else if (currentTime < 50 && currentTime > 25)
+        {
+            spawnInterval = 0.3f;
+        }
+        else if (currentTime < 25)
+        {
+            spawnInterval = 0f;
+        }
+    }
 
     // Function to randomly spawn knives throughout the dodgeball court
     void SpawnKnife()
@@ -41,7 +59,7 @@ public class KnifeSpawner : MonoBehaviour
     // Call routine to create delay before spawning more knives
     IEnumerator SpawnKnives()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(15f);
 
         while(true)
         {
