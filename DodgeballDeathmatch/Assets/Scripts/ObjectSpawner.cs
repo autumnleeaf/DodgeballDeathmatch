@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeSpawner : MonoBehaviour
+public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField]
     float maxX;
@@ -10,12 +10,13 @@ public class KnifeSpawner : MonoBehaviour
     [SerializeField]
     float spawnInterval;
 
-    public GameObject[] Knives;
+    public GameObject Knife;
+    public GameObject Heart;
 
 	// Use this for initialization
 	void Start () 
     {
-        StartSpawningKnives();
+        StartSpawning();
 	}
 
     // Update is called once per frame
@@ -34,26 +35,41 @@ public class KnifeSpawner : MonoBehaviour
         }
         else if (currentTime < 50 && currentTime > 25)
         {
-            spawnInterval = 0.3f;
+            spawnInterval = 0.5f;
         }
         else if (currentTime < 25)
         {
-            spawnInterval = 0f;
+            spawnInterval = 0.3f;
         }
     }
 
     // Function to randomly spawn knives throughout the dodgeball court
     void SpawnKnife()
     {
-        // Statement to choose a random object
-        int rand = Random.Range(0, Knives.Length);
+        Vector3 randomKnifepos = RandomXposition();
 
+        // Show knife on screen to interact with player
+        Instantiate(Knife, randomKnifepos, transform.rotation);
+    }
+
+    // Function to randomly spawn knives throughout the dodgeball court
+    void SpawnHeart()
+    {
+        Vector3 randomHeartpos = RandomXposition();
+
+        // Show heart on screen to interact with player
+        Instantiate(Heart, randomHeartpos, transform.rotation);
+    }
+
+    // Function to place the falling object in a random position across the boundary 
+    // of the dodgeball court
+    Vector3 RandomXposition()
+    {
         // Statement to chose where in the knives object will fall
         float randomX = Random.Range(-maxX, maxX);
         Vector3 randomPos = new Vector3(randomX, transform.position.y, transform.position.z);
 
-        // Show knife on screen to interact with player
-        Instantiate(Knives[rand], randomPos, transform.rotation);
+        return randomPos;
     }
 
     // Call routine to create delay before spawning more knives
@@ -70,14 +86,30 @@ public class KnifeSpawner : MonoBehaviour
         }
     }
 
-    public void StartSpawningKnives()
+    // Call routine to create delay before spawning a heart
+    IEnumerator SpawnHearts()
     {
-        StartCoroutine("SpawnKnives");
+        yield return new WaitForSeconds(50f);
+
+        while (true)
+        {
+            SpawnHeart();
+
+            yield return new WaitForSeconds(spawnInterval+8);
+
+        }
     }
 
-    public void StopSpawningKnives()
+    public void StartSpawning()
+    {
+        StartCoroutine("SpawnKnives");
+        StartCoroutine("SpawnHearts");
+    }
+
+    public void StopSpawning()
     {
         StopCoroutine("SpawnKnives");
+        StopCoroutine("SpawnHearts");
     }
 
 }
