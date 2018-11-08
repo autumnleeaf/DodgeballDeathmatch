@@ -1242,7 +1242,7 @@ GameObject:
   - component: {fileID: 1358227270}
   - component: {fileID: 1358227269}
   m_Layer: 0
-  m_Name: KnifeSpawner
+  m_Name: ObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1263,6 +1263,7 @@ MonoBehaviour:
   spawnInterval: 1
   Knives:
   - {fileID: 1980212593311676, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
+  Heart: {fileID: 1742943784070558, guid: b7f1ac20442b24467962f235fe0d7e30, type: 2}
 --- !u!4 &1358227270
 Transform:
   m_ObjectHideFlags: 0
