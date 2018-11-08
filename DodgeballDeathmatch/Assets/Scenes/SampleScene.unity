@@ -245,6 +245,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1980212593311676, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
+      propertyPath: m_TagString
+      value: Knife
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1014b2d13838146568bd9e2125a5afbf, type: 2}
   m_IsPrefabAsset: 0
@@ -1186,6 +1190,10 @@ Prefab:
     - target: {fileID: 1742943784070558, guid: b7f1ac20442b24467962f235fe0d7e30, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1742943784070558, guid: b7f1ac20442b24467962f235fe0d7e30, type: 2}
+      propertyPath: m_TagString
+      value: Heart
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f1ac20442b24467962f235fe0d7e30, type: 2}

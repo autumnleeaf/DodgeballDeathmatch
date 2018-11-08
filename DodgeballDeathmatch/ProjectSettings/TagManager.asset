@@ -8,6 +8,7 @@ TagManager:
   - End Wall
   - Boundary
   - Heart
+  - Knife
   layers:
   - Default
   - TransparentFX
