@@ -1,6 +1,6 @@
 #! /bin/sh
 
-BASE_URL=https://download.unity3d.com/download_unity
+BASE_URL=https://netstorage.unity3d.com/unity
 HASH=ae1180820377
 VERSION=8.2.8f1
 
