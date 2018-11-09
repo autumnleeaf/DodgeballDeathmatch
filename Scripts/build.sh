@@ -24,8 +24,3 @@ echo "Attempting to build $project for OS X"
 
 echo 'Logs from build'
 cat $(pwd)/$project/unity.log
-
-
-#echo 'Attempting to zip builds'
-#zip -r $(pwd)/$project/Build/mac.zip $(pwd)/$project/Build/osx/
-#zip -r $(pwd)/$project/Build/windows.zip $(pwd)/$project/Build/windows/
