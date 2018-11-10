@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeScript : MonoBehaviour {
+public class FallingObjectScript : MonoBehaviour {
 
 
     public int knifeDamage = 5;
+    public int heartHealth = -10;
 
 	// Use this for initialization
 	void Start () 
@@ -28,9 +29,19 @@ public class KnifeScript : MonoBehaviour {
         {
             var Player = collision.gameObject.GetComponent<PlayerController>().Player;
 
-            //Decrement Score
-            Player.TakeDamage(knifeDamage);
-            Destroy(gameObject);
+            if (gameObject.tag == "Knife")
+            {
+                //Decrement Decrement
+                Player.TakeDamage(knifeDamage);
+                Destroy(gameObject);
+            }
+            else if(gameObject.tag == "Heart")
+            {
+                //Increment Health
+                Player.TakeDamage(heartHealth);
+                Destroy(gameObject);
+            }
+
         }
         // Statement to destory the knife if the player avoids it
         else if (collision.gameObject.tag == "Boundary")
