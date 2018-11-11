@@ -5,8 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour 
 {
     public static GameManager instance;
-    public Movement Movement;
-    float speed = 0f;
+    public GameObject gameOverPanel0;
+    public GameObject gameOverPanel1;
+    public GameObject gameOverPanel2;
 
     private void Awake()
     {
@@ -40,13 +41,16 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 print("Both Lose");
+                gameOverPanel0.SetActive(true);
                 break;
             case 1:
                 Timer.instance.StopTimer();
+                gameOverPanel2.SetActive(true);
                 print("Player 2 Wins");
                 break;
             case 2:
                 Timer.instance.StopTimer();
+                gameOverPanel1.SetActive(true);
                 print("Player 1 Wins");
                 break;
         }
