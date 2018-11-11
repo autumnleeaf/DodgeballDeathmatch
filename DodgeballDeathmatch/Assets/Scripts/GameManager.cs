@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel0;
     public GameObject gameOverPanel1;
     public GameObject gameOverPanel2;
+    public GameObject pausePanel;
 
     private void Awake()
     {
@@ -24,7 +25,27 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-		
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // If the game is already paused, we can resume
+            if (PlayerController.isPaused)
+            {
+                Resume();
+                return;
+            }
+
+            // Stop objects from spawning
+            ObjectSpawner.instance.StopSpawning();
+
+            // Stop the players being controlled
+            PlayerController.isPaused = true;
+
+            // Stop the timer
+            Timer.instance.StopTimer();
+
+            // Show the pause panel
+            pausePanel.SetActive(true);
+        }
 	}
 
     public void GameOver(int team)
@@ -49,6 +70,15 @@ public class GameManager : MonoBehaviour
                 gameOverPanel1.SetActive(true);
                 break;
         }
+    }
+
+    public void Resume()
+    {
+        // Resume everything and hide the panel
+        Timer.instance.timerOn = true;
+        ObjectSpawner.instance.StartSpawning();
+        PlayerController.isPaused = false;
+        pausePanel.SetActive(false);
     }
 
     public void Play()

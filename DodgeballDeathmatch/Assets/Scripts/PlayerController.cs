@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Movement Movement;
     public float _movementSpeed;
     public static PlayerController instance;
+    public static bool isPaused;
 
     public int health = 100;
     public int team = 1;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         myAnimator = GetComponent<Animator>();
         Player = new Player(transform.position, team, _movementSpeed);
+        isPaused = false;
     }
     public void Move ()
     {
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isPaused) return;
         bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
 
         if (pickupKeyDown && Player.ReachableDodgeballs.Count > 0)
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isPaused) return;
         var horizontal = Input.GetAxisRaw(Player.HoriztonalAxisName);
         var vertical = Input.GetAxisRaw(Player.VerticalAxisName);
 
@@ -125,6 +129,7 @@ public class PlayerController : MonoBehaviour
 
     void Throw()
     {
+        if (isPaused) return;
         _dodgeball = Instantiate(dodgeballPrefab) as GameObject;
 
         var direction = 1;
