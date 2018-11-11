@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         ObjectSpawner.instance.StopSpawning();
 
         // Stop players from moving
-        Movement = new Movement(speed);
+        PlayerController.instance.Move();
 
         switch (team)
         {
