@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour 
 {
     public static GameManager instance;
+    public Movement Movement;
+    float speed = 0f;
 
     private void Awake()
     {
@@ -28,17 +30,25 @@ public class GameManager : MonoBehaviour
         print("GameOver()");
         print(team);
 
-        if (team == 0)
+        // Stop objects from spawning
+        ObjectSpawner.instance.StopSpawning();
+
+        // Stop players from moving
+        Movement = new Movement(speed);
+
+        switch (team)
         {
-            print("Both Lose");
-        }
-        else if (team == 1)
-        {
-            print("Player 2 Wins");
-        }
-        else if (team == 2)
-        {
-            print("Player 1 Wins");
+            case 0:
+                print("Both Lose");
+                break;
+            case 1:
+                Timer.instance.StopTimer();
+                print("Player 2 Wins");
+                break;
+            case 2:
+                Timer.instance.StopTimer();
+                print("Player 1 Wins");
+                break;
         }
     }
 

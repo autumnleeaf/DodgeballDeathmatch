@@ -13,8 +13,15 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject Knife;
     public GameObject Heart;
 
-	// Use this for initialization
-	void Start () 
+    public static ObjectSpawner instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    // Use this for initialization
+    void Start () 
     {
         StartSpawning();
 	}

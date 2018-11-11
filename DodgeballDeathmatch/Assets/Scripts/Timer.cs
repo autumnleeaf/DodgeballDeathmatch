@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     Text uiText;
     public int CounterStart = 99;
     public bool timerOn = false;
 
     private int counter;
     private float timer;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public int Current 
     { 
@@ -57,19 +63,16 @@ public class Timer : MonoBehaviour
 
             Current = CounterStart - Mathf.CeilToInt(timer);
 
-            if(timer <= 0f)
-            {
-
-                timerOn = false;
-
-                // Insert screen saying both teams failed to kill their opponent. BOTH lose!
-                //GameManager.instance.GameOver(0);
-            }
             if (Current == 0)
             {
                 GameManager.instance.GameOver(0);
                 timerOn = false;
             }
         }
+    }
+
+    public void StopTimer()
+    {
+        timerOn = false;
     }
 }
