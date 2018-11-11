@@ -19,7 +19,7 @@ public class BallController : MonoBehaviour {
         }
     }
 
-    public bool LiveStatus
+    public bool IsLive
     {
         get
         {
@@ -34,28 +34,40 @@ public class BallController : MonoBehaviour {
 
     private void Update()
     {
+        var player = GameObject.Find("Player");
+        var enemy = GameObject.Find("Enemy");
+
+        Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), GetComponent<Collider2D>(), !IsLive);
+        Physics2D.IgnoreCollision(enemy.GetComponent<BoxCollider2D>(), GetComponent<Collider2D>(), !IsLive);
+
+
         // Makes sure if ball is set to dead, then ball is stopped
-        if (!LiveStatus)
+        if (!IsLive)
         {
             rb.velocity *= 0;
         }
         // Makes sure if ball is stopped, then ball is set to dead
         if (Math.Abs(Vector2.Distance(rb.velocity, Vector2.zero)) < 0.01f){
-            LiveStatus = false;
+            IsLive = false;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D target)
     {
-        if (target.gameObject.tag.Equals("End Wall") == true)
+        if (target.gameObject.tag.Equals("End Wall"))
         {
-            LiveStatus = false;
+            IsLive = false;
+        }
+
+        if (target.gameObject.tag.Equals("Ball"))
+        {
+            IsLive = true;
         }
     }
 
     public void Throw (int direction = 1) {
         rb.velocity = direction * transform.right * throwSpeed;
-        LiveStatus = true;
+        IsLive = true;
     }
 
 }
