@@ -59,9 +59,16 @@ public class Timer : MonoBehaviour
 
             if(timer <= 0f)
             {
+
                 timerOn = false;
 
                 // Insert screen saying both teams failed to kill their opponent. BOTH lose!
+                //GameManager.instance.GameOver(0);
+            }
+            if (Current == 0)
+            {
+                GameManager.instance.GameOver(0);
+                timerOn = false;
             }
         }
     }
