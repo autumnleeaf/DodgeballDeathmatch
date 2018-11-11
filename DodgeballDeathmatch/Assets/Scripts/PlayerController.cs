@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 using UnityEngine.UI;
 using DodgeballDeathmatch;
+using System.IO.Ports;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,17 +13,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public string animWord;
 
 
+
     public Player Player;
     public Movement Movement;
     public float _movementSpeed;
     public static PlayerController instance;
-    public static bool isPaused;
 
     public int health = 100;
     public int team = 1;
+    public int bite ;
+
 
     private GameObject _dodgeball;
     private Animator myAnimator;
+    static SerialPort sp = new SerialPort("COM3", 9600);
 
     private void Awake()
     {
@@ -33,24 +37,41 @@ public class PlayerController : MonoBehaviour
     {
         myAnimator = GetComponent<Animator>();
         Player = new Player(transform.position, team, _movementSpeed);
-        isPaused = false;
+        sp.Open();
+        sp.ReadTimeout = 1;
     }
-    public void Move ()
+    public void Move()
     {
-        Destroy(this.gameObject);
+        if (this != null)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     void Update()
     {
-        if (isPaused) return;
         bool pickupKeyDown = Input.GetKeyDown(Player.PickupKey);
+        bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
+
+        // If Controller is on assign based on controller
+        if (sp.IsOpen && Player.Team == 2)
+        {
+            bite = sp.ReadByte();
+            if (bite == 1 || pickupKeyDown)
+            {
+                pickupKeyDown = true;
+            }
+            if (bite == 2 || throwKeyDown)
+            {
+                throwKeyDown = true;
+            }
+        }
 
         if (pickupKeyDown && Player.ReachableDodgeballs.Count > 0)
         {
             Player.PickupBall();
         }
-
-        bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
 
         if (throwKeyDown && Player.BallCount > 0)
         {
@@ -66,9 +87,47 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPaused) return;
         var horizontal = Input.GetAxisRaw(Player.HoriztonalAxisName);
         var vertical = Input.GetAxisRaw(Player.VerticalAxisName);
+
+        // If controller is on, assign based on its inputs
+        if (sp.IsOpen && Player.Team == 2)
+        {
+
+
+
+            switch (sp.ReadByte())
+            {
+                case 13: // up
+                    vertical = 1;
+                    break;
+                case 12: // down
+                    vertical = -1;
+                    break;
+                case 31: // right
+                    horizontal = 1;
+                    break;
+                case 21: // left
+                    horizontal = -1;
+                    break;
+                case 23: //left + up
+                    horizontal = -1;
+                    vertical = 1;
+                    break;
+                case 22: //left + down
+                    horizontal = -1;
+                    vertical = -1;
+                    break;
+                case 33: //right + up
+                    horizontal = 1;
+                    vertical = 1;
+                    break;
+                case 32: //right + down
+                    horizontal = 1;
+                    vertical = -1;
+                    break;
+            }
+        }
 
         // Allows the speed component in the animation editor to see player speed
         myAnimator.SetFloat(animWord, Mathf.Abs(horizontal + vertical));
@@ -83,12 +142,9 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            if (dodgeball.name.Contains("Dodgeball"))
-            {
-                dodgeball.GetComponent<BallController>().PickupStatus = true;
+            dodgeball.GetComponent<BallController>().PickupStatus = true;
 
-                Player.AddToReachable(dodgeball);
-            }
+            Player.AddToReachable(dodgeball);
         }
     }
 
@@ -98,12 +154,9 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            if (dodgeball.name.Contains("Dodgeball"))
-            {
-                dodgeball.GetComponent<BallController>().PickupStatus = false;
+            dodgeball.GetComponent<BallController>().PickupStatus = false;
 
-                Player.RemoveFromReachable(dodgeball);
-            }
+            Player.RemoveFromReachable(dodgeball);
         }
     }
 
@@ -115,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
             var _ballController = dodgeball.GetComponent<BallController>();
 
-            if(_ballController.LiveStatus)
+            if (_ballController.LiveStatus)
             {
                 Player.TakeDamage(_ballController.Damage);
 
@@ -129,7 +182,6 @@ public class PlayerController : MonoBehaviour
 
     void Throw()
     {
-        if (isPaused) return;
         _dodgeball = Instantiate(dodgeballPrefab) as GameObject;
 
         var direction = 1;
