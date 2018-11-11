@@ -54,9 +54,14 @@ public class BallController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D target)
     {
-        if (target.gameObject.tag.Equals("End Wall") == true)
+        if (target.gameObject.tag.Equals("End Wall"))
         {
             IsLive = false;
+        }
+
+        if (target.gameObject.tag.Equals("Ball"))
+        {
+            IsLive = true;
         }
     }
 
