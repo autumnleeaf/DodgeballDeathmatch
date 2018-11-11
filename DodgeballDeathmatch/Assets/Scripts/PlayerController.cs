@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Player Player;
     public Movement Movement;
     public float _movementSpeed;
+    public static PlayerController instance;
 
     public int health = 100;
     public int team = 1;
@@ -22,10 +23,19 @@ public class PlayerController : MonoBehaviour
     private GameObject _dodgeball;
     private Animator myAnimator;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         myAnimator = GetComponent<Animator>();
         Player = new Player(transform.position, team, _movementSpeed);
+    }
+    public void Move ()
+    {
+        Destroy(this.gameObject);
     }
 
     void Update()
@@ -46,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
         if (Player.Health <= 0)
         {
+            GameManager.instance.GameOver(team);
             Destroy(this.gameObject);
         }
     }
