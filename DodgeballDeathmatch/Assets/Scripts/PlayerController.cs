@@ -115,12 +115,12 @@ public class PlayerController : MonoBehaviour
 
             var _ballController = dodgeball.GetComponent<BallController>();
 
-            if(_ballController.IsLive)
+            if(_ballController.LiveStatus)
             {
                 Player.TakeDamage(_ballController.Damage);
 
                 _ballController.PickupStatus = false;
-                _ballController.IsLive = false;
+                _ballController.LiveStatus = false;
 
                 StartCoroutine("ResetPhysics");
             }
