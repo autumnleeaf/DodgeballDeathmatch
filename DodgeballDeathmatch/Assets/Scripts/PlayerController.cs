@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
         if (Player.Health <= 0)
         {
+            GameManager.instance.GameOver(team);
             Destroy(this.gameObject);
         }
     }
