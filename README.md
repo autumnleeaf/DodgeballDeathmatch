@@ -40,3 +40,17 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
 - [Source Code](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets)
 - [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Tests)
 - Product Demonstration
+
+# Sprint 3
+
+- [Product Backlog](https://docs.google.com/spreadsheets/d/1VHMQML5AV-xroaPTo6ku0EWV2Kxc1BA_4xIVLpn42L0/edit#gid=622973005)
+- [Sprint Backlog](https://docs.google.com/spreadsheets/d/1VHMQML5AV-xroaPTo6ku0EWV2Kxc1BA_4xIVLpn42L0/edit#gid=123869683)
+  - [Burndown Chart](https://docs.google.com/spreadsheets/d/1VHMQML5AV-xroaPTo6ku0EWV2Kxc1BA_4xIVLpn42L0/edit#gid=874902582)
+- [Design Documents](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DesignDocs)
+  - System Architecture
+  - Class Diagrams
+  - Sequence Diagrams
+  - etc.
+- [Source Code](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets)
+- [Test Cases](https://github.com/CharlosNoTape/DodgeballDeathmatch/tree/master/DodgeballDeathmatch/Assets/Tests)
+- Product Demonstration
