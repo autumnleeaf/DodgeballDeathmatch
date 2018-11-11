@@ -29,9 +29,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(int team)
     {
-        print("GameOver()");
-        print(team);
-
         // Stop objects from spawning
         ObjectSpawner.instance.StopSpawning();
 
@@ -41,18 +38,15 @@ public class GameManager : MonoBehaviour
         switch (team)
         {
             case 0:
-                print("Both Lose");
                 gameOverPanel0.SetActive(true);
                 break;
             case 1:
                 Timer.instance.StopTimer();
                 gameOverPanel2.SetActive(true);
-                print("Player 2 Wins");
                 break;
             case 2:
                 Timer.instance.StopTimer();
                 gameOverPanel1.SetActive(true);
-                print("Player 1 Wins");
                 break;
         }
     }
