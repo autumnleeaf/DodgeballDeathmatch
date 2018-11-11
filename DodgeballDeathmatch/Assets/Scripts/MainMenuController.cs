@@ -14,7 +14,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Rules()
     {
-        SceneManager.LoadScene("Rules");
+        SceneManager.LoadScene("RulesMenu");
     }
 
     // To exit the game when the exit button is selected

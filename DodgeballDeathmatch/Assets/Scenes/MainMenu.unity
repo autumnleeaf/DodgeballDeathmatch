@@ -945,7 +945,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 465524439}
-        m_MethodName: Play
+        m_MethodName: Rules
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
