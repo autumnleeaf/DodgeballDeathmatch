@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
@@ -54,6 +55,21 @@ public class GameManager : MonoBehaviour
                 print("Player 1 Wins");
                 break;
         }
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
 
