@@ -79,9 +79,12 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            dodgeball.GetComponent<BallController>().PickupStatus = true;
+            if (dodgeball.name.Contains("Dodgeball"))
+            {
+                dodgeball.GetComponent<BallController>().PickupStatus = true;
 
-            Player.AddToReachable(dodgeball);
+                Player.AddToReachable(dodgeball);
+            }
         }
     }
 
@@ -91,9 +94,12 @@ public class PlayerController : MonoBehaviour
         {
             var dodgeball = trigger.gameObject;
 
-            dodgeball.GetComponent<BallController>().PickupStatus = false;
+            if (dodgeball.name.Contains("Dodgeball"))
+            {
+                dodgeball.GetComponent<BallController>().PickupStatus = false;
 
-            Player.RemoveFromReachable(dodgeball);
+                Player.RemoveFromReachable(dodgeball);
+            }
         }
     }
 
