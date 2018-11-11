@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance;
     Text uiText;
     public int CounterStart = 99;
     public bool timerOn = false;
 
     private int counter;
     private float timer;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public int Current 
     { 
@@ -56,6 +62,17 @@ public class Timer : MonoBehaviour
             timer += seconds;
 
             Current = CounterStart - Mathf.CeilToInt(timer);
+
+            if (Current == 0)
+            {
+                GameManager.instance.GameOver(0);
+                timerOn = false;
+            }
         }
+    }
+
+    public void StopTimer()
+    {
+        timerOn = false;
     }
 }

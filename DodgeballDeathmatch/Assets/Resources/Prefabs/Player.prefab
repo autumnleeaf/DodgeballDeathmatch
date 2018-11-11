@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4764977429587288
 Transform:
   m_ObjectHideFlags: 1
@@ -117,9 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
+  animWord: 
   _movementSpeed: 10
+  health: 100
   team: 1
-  balls: 5
 --- !u!212 &212330403777874938
 SpriteRenderer:
   m_ObjectHideFlags: 1

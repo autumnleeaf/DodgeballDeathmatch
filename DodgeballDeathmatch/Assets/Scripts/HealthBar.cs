@@ -40,6 +40,10 @@ public class HealthBar : MonoBehaviour
                 Player = player;
                 MaxHealth = Player.Health;
             }
+            else 
+            {
+                GameManager.instance.GameOver(0);
+            }
         }
 
         HealthBarImage.fillAmount = Player.Health / MaxHealth;
