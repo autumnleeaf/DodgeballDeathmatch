@@ -1245,7 +1245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  animWord: 
+  animWord: Run
   _movementSpeed: 10
   health: 100
   team: 2
@@ -4598,7 +4598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  animWord: 
+  animWord: Speed
   _movementSpeed: 10
   health: 100
   team: 1
