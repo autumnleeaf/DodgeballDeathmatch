@@ -3,7 +3,8 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-Assets/AssetStoreTools*
+DodgeballDeathmatch/Assets/AssetStoreTools*
+DodgeballDeathmatch/Assets/[Pp]lugins
 
 # Visual Studio cache directory
 .vs/
@@ -37,3 +38,9 @@ sysinfo.txt
 
 # Apple Files
 *.DS_Store
+
+# Ignore changes to Unity version used
+*ProjectVersion.txt
+
+# Log Files
+*.log
