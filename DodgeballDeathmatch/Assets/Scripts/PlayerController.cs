@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public Movement Movement;
     public float _movementSpeed;
     public static PlayerController instance;
+    public static bool isPaused;
+    public static bool usingSerialInput;
 
     public int health = 100;
     public int team = 1;
@@ -37,8 +39,11 @@ public class PlayerController : MonoBehaviour
     {
         myAnimator = GetComponent<Animator>();
         Player = new Player(transform.position, team, _movementSpeed);
-        sp.Open();
-        sp.ReadTimeout = 1;
+        if (usingSerialInput)
+        {
+            sp.Open();
+            sp.ReadTimeout = 1;
+        }
     }
     public void Move()
     {
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour
         bool throwKeyDown = Input.GetKeyDown(Player.ShootKey);
 
         // If Controller is on assign based on controller
-        if (sp.IsOpen && Player.Team == 2)
+        if (usingSerialInput && sp.IsOpen && Player.Team == 2)
         {
             bite = sp.ReadByte();
             if (bite == 1 || pickupKeyDown)
@@ -91,7 +96,7 @@ public class PlayerController : MonoBehaviour
         var vertical = Input.GetAxisRaw(Player.VerticalAxisName);
 
         // If controller is on, assign based on its inputs
-        if (sp.IsOpen && Player.Team == 2)
+        if (usingSerialInput && sp.IsOpen && Player.Team == 2)
         {
 
 
@@ -157,23 +162,6 @@ public class PlayerController : MonoBehaviour
             dodgeball.GetComponent<BallController>().PickupStatus = false;
 
             Player.RemoveFromReachable(dodgeball);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Collider2D>() is CircleCollider2D)
-        {
-            var dodgeball = collision.gameObject;
-
-            var _ballController = dodgeball.GetComponent<BallController>();
-
-            if (_ballController.LiveStatus)
-            {
-                dodgeball.GetComponent<BallController>().PickupStatus = false;
-
-                Player.RemoveFromReachable(dodgeball);
-            }
         }
     }
 
