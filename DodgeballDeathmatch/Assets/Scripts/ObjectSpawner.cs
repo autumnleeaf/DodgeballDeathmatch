@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField]
-    int maxX;
+    float maxX;
 
     [SerializeField]
     float spawnInterval;
@@ -13,15 +13,8 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject Knife;
     public GameObject Heart;
 
-    public static ObjectSpawner instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
-    // Use this for initialization
-    void Start () 
+	// Use this for initialization
+	void Start () 
     {
         StartSpawning();
 	}
@@ -73,7 +66,7 @@ public class ObjectSpawner : MonoBehaviour
     Vector3 RandomXposition()
     {
         // Statement to chose where in the knives object will fall
-        int randomX = Random.Range(-maxX, maxX);
+        float randomX = Random.Range(-maxX, maxX);
         Vector3 randomPos = new Vector3(randomX, transform.position.y, transform.position.z);
 
         return randomPos;
