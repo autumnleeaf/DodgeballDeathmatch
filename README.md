@@ -1,4 +1,3 @@
-<<<<<<< master
 # Dodgeball Deathmatch - Project for COP 4331 - Spring 2018
 A dodgeball game that will implement a custom controller.
 
@@ -58,4 +57,3 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
 =======
 # DodgeballDeathmatch
 A dodgeball game that will implement a custom controller. Test
->>>>>>> master
