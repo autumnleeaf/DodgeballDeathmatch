@@ -56,4 +56,4 @@ For hardcore gamers who enjoy unique ways to play video games, the game Dodgebal
 - [Product Demonstration](https://youtu.be/JPa0fIUJogw)
 
 # DodgeballDeathmatch
-A dodgeball game that will implement a custom controller. Test
+A dodgeball game that will implement a custom controller.
