@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CounterStart: 99
-  timerOn: 0
+  timerOn: 1
 --- !u!1 &96153474
 GameObject:
   m_ObjectHideFlags: 0
