@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CounterStart: 99
-  timerOn: 1
+  timerOn: 0
 --- !u!1 &96153474
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   gameOverPanel0: {fileID: 1980610435}
   gameOverPanel1: {fileID: 2061490598}
   gameOverPanel2: {fileID: 1849550308}
+  pausePanel: {fileID: 0}
 --- !u!4 &96153476
 Transform:
   m_ObjectHideFlags: 0
@@ -766,6 +767,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349285652}
   m_CullTransparentMesh: 0
+--- !u!95 &467560534 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95900826089336466, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
+    type: 2}
+  m_PrefabInternal: {fileID: 1248968815}
 --- !u!1 &507518694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,10 +1245,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  animWord: Run
+  animWord: 
   _movementSpeed: 10
   health: 100
   team: 2
+  bite: 0
 --- !u!61 &602528837
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2623,6 +2630,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114758084349364822, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
+        type: 2}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 467560534}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503, type: 2}
   m_IsPrefabAsset: 0
@@ -4586,10 +4598,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgeballPrefab: {fileID: 1004091786447258, guid: 84fcaeecb2c6c4a7fbaeaedaa29f1503,
     type: 2}
-  animWord: Speed
+  animWord: 
   _movementSpeed: 10
   health: 100
   team: 1
+  bite: 0
 --- !u!95 &1864670715
 Animator:
   serializedVersion: 3
